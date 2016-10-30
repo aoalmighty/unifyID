@@ -21,4 +21,4 @@ Future ideas:
 
 I am sure that if I had more time, I can enhance the application.
 
-Thank you for taking the time to read and examine my work.
+Thank you for taking the time to read and examine my work. Do contact me at ao356@live.com to get in touch with me. Hope to hear from you soon.
