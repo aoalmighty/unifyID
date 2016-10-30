@@ -6,7 +6,7 @@ The application takes 5 photos and securely saves them.
 
 Challenges Faced:
 
-Yhe xCode simulator does not support a camera so I could not test the product as I did the challenge. I do not have an active developer's account and testing proved to be very challenging. Thus, I am unsure if the application can actaully run, but I hope I will also be judged based on the code. This application was essential coded 'blindly', but I tried to make the best use of what I had.
+The xCode simulator does not support a camera so I could not test the product as I did the challenge. I do not have an active developer's account and testing proved to be very challenging. Thus, I am unsure if the application can actaully run, but I hope I will also be judged based on the code. This application was essential coded 'blindly', but I tried to make the best use of what I had.
 
 I have never designed an application that requires a camera function. 
 I started with the UIImagePicker and soon realize it could not take multiple pictures. So I spend the first hour or so looking up tutorials on AVFoundation and AVCaptureDevice, to have more control over the camera.
