@@ -21,6 +21,7 @@ Future ideas:
 -Face Detection (image recognition)
 -Auto-focus on face upon detection
 -Clearer and well commented code(Due to time constraints)(Feel free to email if you need any clarification regarding the code)
+-SALT for encryption
 
 I am sure that if I had more time, I can enhance the application.
 
