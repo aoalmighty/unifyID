@@ -2,6 +2,8 @@ Hey there!
 
 I am Ashraf Omar, looking for an internship position at UnifyID. Here is the iOS application that I have designed for this challenge.
 
+The application takes 5 photos and securely saves them.
+
 Challenges Faced:
 
 Yhe xCode simulator does not support a camera so I could not test the product as I did the challenge. I do not have an active developer's account and testing proved to be very challenging. Thus, I am unsure if the application can actaully run, but I hope I will also be judged based on the code. This application was essential coded 'blindly', but I tried to make the best use of what I had.
@@ -17,6 +19,7 @@ Future ideas:
 
 -More intuitive UI/UX
 -Face Detection (image recognition)
+-Auto-focus on face upon detection
 -Clearer and well commented code(Due to time constraints)(Feel free to email if you need any clarification regarding the code)
 
 I am sure that if I had more time, I can enhance the application.
