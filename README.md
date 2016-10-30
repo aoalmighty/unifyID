@@ -9,8 +9,6 @@ Yhe xCode simulator does not support a camera so I could not test the product as
 I have never designed an application that requires a camera function. 
 I started with the UIImagePicker and soon realize it could not take multiple pictures. So I spend the first hour or so looking up tutorials on AVFoundation and AVCaptureDevice, to have more control over the camera.
 
-Capturing the the require number of images, within the specified time interval (0.5s), was done using timers.
-
 The second difficulty I had was to encrypt the images. As I had spent many hours learning as I progress through the challenge, there was little time left. I resorted to opensource of which the built in encryption was used "dataUsingEncoding(NSUTF8StringEncoding)"
 
 I found this challenge very interesting as I have learnt a lot through the process. I will continue to learn and hope to be able to contribute significantly to unifyID.
@@ -19,6 +17,7 @@ Future ideas:
 
 -More intuitive UI/UX
 -Face Detection (image recognition)
+-Clearer and well commented code(Due to time constraints)(Feel free to email if you need any clarification regarding the code)
 
 I am sure that if I had more time, I can enhance the application.
 
