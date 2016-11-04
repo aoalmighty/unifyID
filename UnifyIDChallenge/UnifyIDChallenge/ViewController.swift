@@ -22,15 +22,19 @@ class ViewController: UIViewController {
     
     var imageNumber:Int = 1
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         
-        let error = NSErrorPointer()
-        
-        let device = AVCaptureDevice.defaultDeviceWithMediaType(AVMediaTypeVideo)
+        let device = AVCaptureDevice.defaultDevice(withMediaType: AVMediaTypeVideo)
         
         // use front camera
-        if device.position == AVCaptureDevicePosition.Front{
-            let input = AVCaptureDeviceInput(device: device, error: error)
+        var input:AVCaptureDeviceInput
+        if device?.position == AVCaptureDevicePosition.front{
+            do {
+                input = try AVCaptureDeviceInput(device: device)
+            } catch {
+                NSLog("Error getting camera")
+                return
+            }
             
             if captureSession.canAddInput(input){
                 captureSession.addInput(input)
@@ -44,7 +48,7 @@ class ViewController: UIViewController {
                 
                 previewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
                 previewLayer.videoGravity = AVLayerVideoGravityResizeAspectFill
-                previewLayer.connection.videoOrientation = AVCaptureVideoOrientation.Portrait
+                previewLayer.connection.videoOrientation = AVCaptureVideoOrientation.portrait
                 cameraView.layer.addSublayer(previewLayer)
                 
                 previewLayer.position = CGPoint(x: self.cameraView.frame.width/2, y: self.cameraView.frame.height/2)
@@ -60,10 +64,10 @@ class ViewController: UIViewController {
         
         // Takes Photo every 0.5sec
         takePhotos()
-        var timer = NSTimer.scheduledTimerWithTimeInterval(0.5, target: self, selector: Selector("takePhotos"), userInfo: nil, repeats: true)
+        var timer = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(ViewController.takePhotos), userInfo: nil, repeats: true)
         
         // Stop taking photos after 10sec
-        var timerAfterPhotos = NSTimer.scheduledTimerWithTimeInterval(10, target: self, selector: Selector("doneTakingPhotos"), userInfo: nil, repeats: false)
+        var timerAfterPhotos = Timer.scheduledTimer(timeInterval: 10, target: self, selector: Selector("doneTakingPhotos"), userInfo: nil, repeats: false)
         func doneTakingPhotos(){
             timer.invalidate()
         }
@@ -76,8 +80,8 @@ class ViewController: UIViewController {
     
 
     func takePhotos(){
-        if let videoConnection = sessionOutput.connectionWithMediaType(AVMediaTypeVideo){
-            sessionOutput.captureStillImageAsynchronouslyFromConnection(videoConnection, completionHandler: {
+        if let videoConnection = sessionOutput.connection(withMediaType: AVMediaTypeVideo){
+            sessionOutput.captureStillImageAsynchronously(from: videoConnection, completionHandler: {
                 buffer, error in
                 
                 let imageData = AVCaptureStillImageOutput.jpegStillImageNSDataRepresentation(buffer)
@@ -86,8 +90,8 @@ class ViewController: UIViewController {
                 // UIImageWriteToSavedPhotosAlbum(UIImage(data: imageData)!, nil, nil, nil)
                 
                 // Stores image securely using keychain
-                let isSaved:Bool = KeychainWrapper.setData(imageData, forKey: String(self.imageNumber))
-                self.imageNumber++
+                let isSaved:Bool = KeychainWrapper.setData(imageData!, forKey: String(self.imageNumber))
+                self.imageNumber += 1
                 
                 // Use "1/2/3/4/5" as keyname to retrieve desired image
                 //KeychainWrapper.objectForKey(<#keyName: String#>)
@@ -98,16 +102,16 @@ class ViewController: UIViewController {
     
     
     // Manually Takes a photo (USED FOR TESTING CAMERA)
-    @IBAction func takePhoto(sender: AnyObject) {
+    @IBAction func takePhoto(_ sender: AnyObject) {
         
-        if let videoConnection = sessionOutput.connectionWithMediaType(AVMediaTypeVideo){
-            sessionOutput.captureStillImageAsynchronouslyFromConnection(videoConnection, completionHandler: {
+        if let videoConnection = sessionOutput.connection(withMediaType: AVMediaTypeVideo){
+            sessionOutput.captureStillImageAsynchronously(from: videoConnection, completionHandler: {
                 buffer, error in
                 
                 let imageData = AVCaptureStillImageOutput.jpegStillImageNSDataRepresentation(buffer)
                 
                 // Stores image in photo album
-                UIImageWriteToSavedPhotosAlbum(UIImage(data: imageData)!, nil, nil, nil)
+                UIImageWriteToSavedPhotosAlbum(UIImage(data: imageData!)!, nil, nil, nil)
             })
         }
     }
